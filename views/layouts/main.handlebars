@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Complaint System</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <style>
+    /* Navbar styles */
+    .navbar {
+      background-color: #2c3e50 !important;
+      transition: all 0.5s;
+    }
+
+    .navbar a {
+      color: #ffffff !important;
+      transition: all 0.4s;
+    }
+
+    .navbar a:hover {
+      color: #28a745 !important;
+    }
+
+    .navbar-brand {
+      animation: fadeIn 2s;
+    }
+
+    .nav-link {
+      margin-right: 20px;
+      animation: slideIn 2s;
+    }
+
+    .nav-link a {
+      padding: 8px 16px;
+      border: 2px solid #28a745;
+      border-radius: 5px;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .nav-link a:hover {
+      background-color: #28a745;
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Footer styles */
+    .footer {
+      text-align: center;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #34495e !important;
+      color: #dde2e7;
+      padding: 20px 0;
+      animation: enlargeFooter 3s;
+      font-size: 24px;
+    }
+
+    .footer-content {
+      animation: slideInContent 3s;
+    }
+
+    @keyframes enlargeFooter {
+      0% {
+        height: 50px;
+      }
+
+      100% {
+        height: 150px;
+      }
+    }
+
+    @keyframes slideInContent {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animated {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    .fade-in {
+      animation-name: fadeInAnimation;
+    }
+
+    @keyframes fadeInAnimation {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .slide-up {
+      animation-name: slideUpAnimation;
+    }
+
+    @keyframes slideUpAnimation {
+      from {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .footer {
+        position: relative;
+        width: 100%;
+      }
+
+      .navbar-brand {
+        font-size: 1.5em;
+      }
+
+      .nav-link a {
+        padding: 6px 12px;
+        font-size: 1.1em;
+      }
+    }
+
+    #chatbot-popup {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: #d3cfcf;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      z-index: 1000;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+    }
+
+    #chatbot-popup h3 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    #chatbot-popup p {
+      margin: 0 0 20px;
+      color: #666;
+    }
+
+    #close-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: #fffcfc;
+      color: #333;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    #close-btn:hover {
+      background-color: #aaa;
+    }
+
+    #user-input {
+      width: calc(100% - 40px);
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    #submit-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #28a745;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #submit-btn:hover {
+      background-color: #218838;
+    }
+     #chat-content {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    #chat-content p:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    #chat-content p {
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+
+    #chat-content p:first-child {
+      margin-top: 0;
+    }
+
+    #chat-content p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark animated slide-up">
+    {{!-- <img class="image1" src="" alt="Complaint System Logo"> --}}
+    {{#if user}}
+    <li style="list-style-type: none;" class="nav-item"> <a class="navbar-brand" href="/">Complaint System</a></li>
+    {{else}}
+    <li style="list-style-type: none;" class="nav-item"> <a class="navbar-brand" href="/home">Complaint System</a>
+    </li>
+    {{/if}}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+      aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav ml-auto">
+        {{#if user}}
+        <li class="nav-item"> <a class="nav-link" style="font-size: larger;" href="/logout"
+            class="animated fade-in">Logout</a>
+        </li>
+        {{else}}
+        <li class="nav-item"> <a class="nav-link" style="font-size: larger;" href="/login"
+            class="animated fade-in">Login</a>
+        </li>
+        <li class="nav-item"> <a class="nav-link" style="font-size: larger;" href="/register"
+            class="animated fade-in">Register</a>
+        </li>
+        {{/if}}
+      </ul>
+
+    </div>
+  </nav>
+
+  <div class="animated slide-up">
+    {{#if success_msg}}
+    <div class="alert alert-success fade-in">{{success_msg}}</div>
+    {{/if}}
+    {{#if error_msg}}
+    <div class="alert alert-danger fade-in">{{error_msg}}</div>
+    {{/if}}
+    {{#if error}}
+    <div class="alert alert-danger fade-in">{{error}}</div>
+    {{/if}}
+    {{#if errors}}
+    {{#each errors}}
+    <div class="alert alert-danger fade-in">{{msg}}</div>
+    {{/each}}
+    {{/if}}
+    {{{body}}}
+  </div>
+
+  <div class="footer animated slide-up">
+    <div class="footer-content">
+      &copy; 2023 Complaint System | <a href="/terms" class="animated fade-in">Terms of Service</a> | <a href="/privacy"
+        class="animated fade-in">Privacy Policy</a>
+    </div>
+  </div>
+  <!-- ... (previous HTML code remains unchanged) ... -->
+
+  <!-- Chatbot Icon -->
+  <div id="chatbot-icon" style="position: fixed; bottom: 30px; right:40px;">
+    <i class="fas fa-comment-dots" style="font-size: 36px; color: #faecec; cursor: pointer;"></i>
+  </div>
+
+  <!-- Chatbot Popup -->
+ <div id="chatbot-popup">
+    <button id="close-btn">&times;</button>
+    <h3 style="text-align: center;font-weight:bolder" class="m-2">Chat with us</h3>
+    <div id="chat-content"></div>
+    <input style="width: 100%;" type="text" id="user-input" placeholder="Type your message here..." />
+    <button id="submit-btn">Send</button>
+  </div>
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script>
+    document.getElementById('chatbot-icon').addEventListener('click', function () {
+      document.getElementById('chatbot-popup').style.display = 'block';
+    });
+
+    document.getElementById('close-btn').addEventListener('click', function () {
+      document.getElementById('chatbot-popup').style.display = 'none';
+    });
+   document.addEventListener('DOMContentLoaded', function () {
+      const chatContent = document.getElementById('chat-content');
+      const userInput = document.getElementById('user-input');
+      const submitBtn = document.getElementById('submit-btn');
+
+      submitBtn.addEventListener('click', function () {
+        sendMessage();
+      });
+
+      userInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          sendMessage();
+        }
+      });
+
+      function sendMessage() {
+        const userMessage = userInput.value;
+        if (userMessage.trim() !== '') {
+          const userMessageElement = document.createElement('p');
+          userMessageElement.textContent = 'You: ' + userMessage;
+          chatContent.appendChild(userMessageElement);
+          chatContent.scrollTop = chatContent.scrollHeight; // Scroll down
+          userInput.value = '';
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+
+
+</body>
+
+</html>

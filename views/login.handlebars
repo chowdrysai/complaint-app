@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Meta tags and other stylesheets -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .form-outline i {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .form-outline:hover i {
+      transform: translateY(-20px) !important;
+    }
+  </style>
+
+</head>
+
+<body style="height: 100vh; background-color: #eee;">
+  <div>
+    <div class="container mt-5">
+      <div class="card text-black" style="border-radius: 25px;">
+        <div class="card-body">
+          <div class="row justify-content-center ">
+            <div class="col-md-12 col-lg-8 col-xl-6 order-1 order-lg-4">
+
+              <p class=" h3 m-5">Welcome to Complaint app</p>
+
+              <form method="post" action="/login" class="">
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <!-- Icon -->
+                  <i class="fas fa-user fa-lg me-3 fa-fw" style="padding-right: 10px;"></i>
+                  <!-- Form input -->
+                  <div class="form-outline flex-fill mb-0">
+                    <input type="text" id="username" class="form-control" placeholder="username" name="username" />
+                    <!-- <label class="form-label" for="form3Example1c">Your Name</label> -->
+                  </div>
+                </div>
+
+                <!-- Password field -->
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <!-- Icon -->
+                  <i class="fas fa-lock fa-lg me-3 fa-fw" style="padding-right: 10px;"></i>
+                  <!-- Form input -->
+                  <div class="form-outline flex-fill mb-0">
+                    <input type="password" id="form3Example4c" class="form-control" placeholder="Password"
+                      name="password" />
+                    {{!-- <label class="form-label" for="form3Example4c">Password</label> --}}
+                  </div>
+                </div>
+
+                <p class="mx-4">Don't Have An Account? <a class="btn btn-warning btn-sm" href="/register">Register</a></p>
+
+                <!-- Terms of Service checkbox -->
+                <div class="form-check d-flex justify-content-center mb-3">
+                  <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" name="terms" />
+                  <label class="form-check-label" for="form2Example3">
+                    I agree to all statements in <a href="#!">Terms of service</a>
+                  </label>
+                </div>
+
+                <!-- Register button -->
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                  <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                </div>
+
+              </form>
+
+            </div>
+            <div class="col-md-10 col-lg-6 col-xl-6 d-flex align-items-center order-1 order-lg-2">
+
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                width="100%" height="80%" class="img-fluid" alt="Sample image">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

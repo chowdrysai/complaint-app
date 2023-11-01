@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Meta tags and other stylesheets -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .form-outline i {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .form-outline:hover i {
+      transform: translateY(-20px) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <section style="background-color: #eee;">
+    <div class="container h-100" style="padding-bottom: 50px;">
+      <div class="card text-black" style="border-radius: 25px;">
+        <div class="card-body p-md-2">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-12 col-lg-8 col-xl-6 order-2 order-lg-1">
+              <p class="text-center h3 m-5">Welcome to Complaint app</p>
+              <form class="" method="post" action="/register">
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <!-- Icon -->
+                  <i class="fas fa-user fa-lg me-3 fa-fw" style="padding-right: 10px;"></i>
+                  <!-- Form input -->
+                  <div class="form-outline flex-fill">
+                    <input type="text" id="username" class="form-control" placeholder="UserName" name="username" />
+                  </div>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <i class="fas fa-user fa-lg me-3 fa-fw" style="padding-right: 10px;"></i>
+                  <!-- Form input -->
+                  <div class="form-outline flex-fill mb-0">
+                    <input type="text" id="form3Example1c" class="form-control" placeholder="Your Name" name="name" />
+                  </div>
+                </div>
+
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <i class="fas fa-envelope fa-lg me-3 fa-fw" style="padding-right: 10px;"></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <input type="email" id="form3Example3c" class="form-control" placeholder="Your Email"
+                      name="email" />
+                  </div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center mb-4">
+
+                  <i class="fas fa-lock fa-lg me-3 fa-fw" style="padding-right: 10px;"></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <input type="password" id="form3Example4c" class="form-control" placeholder="Password"
+                      name="password" />
+                  </div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <i class="fas fa-key fa-lg me-3 fa-fw" style="padding-right: 10px;"></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <input type="password" id="form3Example4cd" class="form-control" placeholder="confirm password"
+                      name="password2" />
+                  </div>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <!-- Icon -->
+                  <i class="fas fa-users fa-lg me-3 fa-fw" style="padding-right: 10px "></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <select class="form-control" name="role" id="role">
+                      <option value="user">User</option>
+                      <option value="worker">Worker</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="text-center mx-4">Already have an account? <a class="btn btn-warning btn-sm" href="/login">Login Now</a></p>
+
+                <!-- Terms of Service checkbox -->
+                <div class="form-check d-flex justify-content-center mb-3">
+                  <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" name="terms" />
+                  <label class="form-check-label" for="form2Example3">
+                    I agree to all statements in <a href="#!">Terms of service</a>
+                  </label>
+                </div>
+
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                  <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                </div>
+
+              </form>
+
+            </div>
+            <div class="col-md-10 col-lg-6 col-xl-6 d-flex align-items-center mt-5 order-1 order-lg-2">
+
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                width="100%" class="img-fluid" alt="Sample image">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

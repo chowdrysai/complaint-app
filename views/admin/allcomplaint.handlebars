@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Add Font Awesome CDN to the head section of your HTML file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    .card {
+      border: 1px solid #e2e2e2;
+      border-radius: 8px;
+      transition: all 0.3s;
+      margin-bottom: 0.5em;
+      padding-bottom: 2em;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-bottom: 1px solid #e2e2e2;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .list-unstyled li {
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .editable-field {
+      border: 1px solid #e2e2e2;
+      border-radius: 5px;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .filtered {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search..." onkeyup="filterComplaints()">
+      </div>
+    </div>
+    <div class="row">
+      <!-- Display all complaints initially -->
+      {{#each complaints}}
+      <div class="col-md-4 mb-4 complaint-card">
+        <div class="card box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{name}}
+              {{!-- {{#if (eq status "Active")}}
+              <i class="far fa-edit edit-icon" style="cursor: pointer; color: #007bff; margin-left: 10px;"
+                onclick="toggleEdit(this)"></i>
+              <i class="far fa-trash-alt" style="cursor: pointer; color: #dc3545; margin-left: 10px;"></i>
+              <i class="fas fa-check update-icon " style="cursor: pointer; color: #28a745; margin-left: 10px;"
+                onclick="updateComplaint(this, '{{id}}')"></i>
+              {{/if}} --}}
+            </h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">
+              <span class="text-field">{{flat_no}}</span>
+              <input class="editable-field hidden" type="text" value="{{flat_no}}">
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><strong>Email:</strong> <span class="text-field">{{email}}</span><input class="editable-field hidden"
+                  type="text" value="{{email}}"></li>
+              <li><strong>Description:</strong> <span class="text-field">{{desc}}</span><input
+                  class="editable-field hidden" type="text" value="{{desc}}"></li>
+              <li><strong>Contact:</strong> <span class="text-field">{{contact}}</span><input
+                  class="editable-field hidden" type="text" value="{{contact}}"></li>
+              <li><strong>Status:</strong>
+                {{#if (eq status "Active")}}
+                <button style="color: red">{{status}}</button>
+                {{else}}
+                <span style="color: green">{{status}}</span>
+                {{/if}}
+
+              </li>
+            </ul>
+            <button type="button" class="btn btn-lg btn-outline-primary" onclick="viewDetails(this)">View
+              Details</button>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <script>
+    function toggleEdit(icon) {
+      const cardBody = icon.closest('.card').querySelector('.card-body');
+      const textFields = cardBody.querySelectorAll('.text-field');
+      const editFields = cardBody.querySelectorAll('.editable-field');
+      const updateIcon = cardBody.querySelector('.update-icon');
+      const updateButton = cardBody.querySelector('.btn');
+
+      textFields.forEach(field => field.classList.toggle('hidden'));
+      editFields.forEach(field => field.classList.toggle('hidden'));
+      updateIcon.classList.toggle('hidden');
+      if (!updateIcon.classList.contains('hidden')) {
+        updateButton.classList.remove('hidden');
+      } else {
+        updateButton.classList.add('hidden');
+      }
+    }
+
+    function updateComplaint(icon, id) {
+      const card = icon.closest('.card');
+      const cardBody = card.querySelector('.card-body');
+      const nameElement = card.querySelector('.my-0');
+      const editFields = cardBody.querySelectorAll('.editable-field');
+      const textFields = cardBody.querySelectorAll('.text-field');
+      const updateButton = cardBody.querySelector('.btn');
+
+      const name = nameElement.textContent.trim();
+      const data = {
+        name: name, // Add the name property
+        flat: editFields[0].value,
+        email: editFields[1].value,
+        desc: editFields[2].value,
+        contact: editFields[3].value
+      };
+      console.log(data);
+      fetch('http://localhost:3001/complaintUpdate', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then(data => {
+          console.log('Success:', data);
+          window.location.href = "/status";
+          // Reset card to initial state
+
+          textFields.forEach(field => {
+            field.classList.remove('hidden');
+          });
+          editFields.forEach(field => {
+            field.classList.add('hidden');
+          });
+          updateButton.classList.add('hidden');
+
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    function viewDetails(button) {
+      // Add logic to handle view details here
+      console.log('View Details clicked');
+    }
+    function filterComplaints() {
+      var input, filter, cards, card, content, i, j, shouldDisplay;
+      input = document.getElementById('searchInput');
+      filter = input.value.toUpperCase();
+      cards = document.getElementsByClassName('complaint-card');
+      for (i = 0; i < cards.length; i++) {
+        card = cards[i];
+        content = card.innerText.toUpperCase();
+        shouldDisplay = content.indexOf(filter) > -1;
+        card.style.display = shouldDisplay ? '' : 'none';
+      }
+    }
+
+  </script>
+</body>
+
+</html>

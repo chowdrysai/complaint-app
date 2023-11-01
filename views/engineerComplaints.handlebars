@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Add Font Awesome CDN to the head section of your HTML file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    .card {
+      border: 1px solid #e2e2e2;
+      border-radius: 8px;
+      transition: all 0.3s;
+      margin-bottom: 0.5em;
+      padding-bottom: 2em;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-bottom: 1px solid #e2e2e2;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .list-unstyled li {
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .editable-field {
+      border: 1px solid #e2e2e2;
+      border-radius: 5px;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .filtered {
+      display: none;
+    }
+
+    .card-body {
+    position: relative;
+  }
+
+  .card-body button[type="submit"] {
+    border: none;
+    border-radius: 5px;
+    padding: 7px 10px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .card-body button[type="submit"]:hover {
+    background-color: #218838;
+    animation: none; /* Disable animation on hover */
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search..." onkeyup="filterComplaints()">
+      </div>
+    </div>
+    <div class="row">
+      {{#each complaints}}
+
+      <div class="col-md-4 mb-4 complaint-card">
+        <div class="card box-shadow">
+          <div class="card-header">
+            <h5 class="my-0 font-weight-normal">{{uuidToNumber uuid}}</h5>
+          </div>
+          <div class="card-body">
+            <form method="post" action="/CloseTicket">
+              <input type="hidden" value="{{uuid}}" name="complaintUuid">
+              <input type="hidden" value="{{route}}" name="route">
+              <h1 class="card-title pricing-card-title">
+                <span>{{name}}</span>
+              </h1>
+              <ul class="list-unstyled mt-1 mb-4">
+                <li><strong>Flat No.:</strong> {{flat_no}}</li>
+                <li><strong>Email:</strong> {{email}}</li>
+                <li><strong>Description:</strong> {{desc}}</li>
+                <li><strong>Contact:</strong> {{contact}}</li>
+                <li><strong>Status:</strong>
+                  {{#if isActive}}
+                  <span><button style="background-color:#28a745;" type="submit">Active</button></span>
+                  {{else}}
+                  {{status}}
+                  {{/if}}
+                </li>
+              </ul>
+              <button type="button" class="btn btn-lg btn-outline-primary" onclick="viewDetails(this)">View
+                Details</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {{/each}}
+    </div>
+  </div>
+
+  <script>
+    function uuidToNumber(uuid) {
+      let number = 0;
+      for (let i = 0; i < uuid.length; i++) {
+        number += uuid.charCodeAt(i);
+      }
+      return number;
+    }
+    function viewDetails(button) {
+      // Add logic to handle view details here
+      console.log('View Details clicked');
+    }
+
+    function filterComplaints() {
+      var input, filter, cards, card, content, i, j, shouldDisplay;
+      input = document.getElementById('searchInput');
+      filter = input.value.toUpperCase();
+      cards = document.getElementsByClassName('complaint-card');
+      for (i = 0; i < cards.length; i++) {
+        card = cards[i];
+        content = card.innerText.toUpperCase();
+        shouldDisplay = content.indexOf(filter) > -1;
+        card.style.display = shouldDisplay ? '' : 'none';
+      }
+    }
+
+  </script>
+</body>
+
+</html>

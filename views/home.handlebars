@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Complaint App</title>
+    <!-- Add your CSS link here -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .content {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            animation: slideInAnimation 1s ease;
+        }
+
+        .content .description {
+            padding: 20px;
+            animation: fadeInAnimation 1s ease;
+        }
+
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            animation: zoomInAnimation 1s ease;
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .content img {
+                max-width: 100%;
+                margin-top: 0;
+            }
+        }
+
+        /* Animation for components */
+        @keyframes slideInAnimation {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .animated-paragraph {
+            font-size: 18px;
+            line-height: 1.6;
+            animation: fadeInAnimation 1s ease;
+        }
+
+        .animated-list {
+            padding-left: 20px;
+            list-style: disc;
+            font-size: 18px;
+            line-height: 1.6;
+            animation: fadeInAnimation 1s ease;
+        }
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation for the Register Now button */
+        .btn-success {
+            animation: scaleAnimation 0.5s infinite alternate;
+        }
+
+        @keyframes scaleAnimation {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="description">
+            <h2>About the App</h2>
+            <p class="animated-paragraph">
+                Our Community Complaint App is designed to make it easy for you to report and address any issues or
+                concerns in your community. Whether it's a problem with infrastructure, safety, or any other
+                community-related matter, this platform helps you raise your voice and work towards finding solutions.
+            </p>
+            <h2>Key Features</h2>
+            <ul class="animated-list">
+                <li>Effortless complaint submission</li>
+                <li>Real-time tracking of complaint status</li>
+                <li>Community-driven solutions</li>
+                <li>Easy communication with local authorities</li>
+            </ul>
+            <h2>Get Started</h2>
+            <p class="animated-paragraph">Join the app and start making a difference in your community today.</p>
+            <a class="btn btn-success " href="/register" style="animation: scaleAnimation 0.5s infinite alternate;">Get Started</a>
+        </div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4LM2qWyg5eTgl7-uFqolzB_3d1SqRHpvbFw&usqp=CAU "
+            style="width: 100%; height:auto" alt="Community Banner">
+    </div>
+</body>
+</html>

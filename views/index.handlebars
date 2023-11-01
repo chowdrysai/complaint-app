@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Head content and stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #333;
+            animation: fadeInDown 1s;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #555;
+            animation: fadeInUp 1s;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 0 1rem;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            border: 2px solid #28a745;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        .animated-button {
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
+
+        .animated-button:nth-child(1) {
+            animation-name: fadeInLeft;
+            animation-delay: 0.5s;
+        }
+
+        .animated-button:nth-child(2) {
+            animation-name: fadeInRight;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+         .complaint-info {
+            margin-top: 2rem;
+            color: #666;
+        }
+
+        .complaint-info p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="animated fadeInDown">Welcome to the Complaint Management System</h2>
+        <br>
+        <div class="complaint-info">
+            <p>Community Complaints: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce euismod justo a
+                ligula tincidunt, sit amet dignissim lorem ultrices.</p>
+            <p>Our system is dedicated to addressing issues within our community and ensuring timely resolution.</p>
+        </div>
+        <h3 class="animated fadeInUp">Hello, {{user.name}}!</h3>
+
+        <div class="btn-container">
+            {{#if isAdmin}}
+            <a href="/complaint" class="btn btn-success animated-button">Register a Complaint</a>
+            <a href="/AllComplaint" class="btn btn-success animated-button">Show all Complaints</a>
+            <a href="/admin" class="btn btn-success animated-button">Show active Complaints</a>
+            {{else if isJeng}}
+            <a href="/jeng" class="btn btn-success animated-button">Show All Complaints</a>
+            <a href="/jengpending" class="btn btn-success animated-button">Show Pending Complaints</a>
+            {{else if isUser}}
+            <a href="/complaint" class="btn btn-success animated-button">Register a Complaint</a>
+            <a href="/status" class="btn btn-success animated-button">Check Complaint Status</a>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+</html>
