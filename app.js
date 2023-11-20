@@ -8,9 +8,16 @@ const session = require('express-session');
 const passport = require('passport');
 const Handlebars = require('handlebars');
 const app = express();
+const cors=require("cors")
 
 const port = process.env.PORT || 3000;
 const index = require('./routes/index');
+
+app.use(cors({
+  origin: "http:///deploy-mern-1whq.vercel.app",
+  methods: ['POST', 'GET', 'DELETE', 'PUT', 'PATCH'],
+  credentials: true
+}))
 
 // View Engine
 const hbs = exphbs.create({

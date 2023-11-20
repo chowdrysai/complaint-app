@@ -18,6 +18,7 @@
     "bcryptjs": "*",
     "body-parser": "*",
     "connect-flash": "*",
+    "cors": "^2.8.5",
     "express": "*",
     "express-handlebars": "*",
     "express-messages": "*",
